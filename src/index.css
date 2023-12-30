@@ -66,6 +66,36 @@ header {
 }
 
 
+
+/**
+*GENERIC
+*/
+.title-page{
+    margin-top: 10px;
+}
+.product-link{
+    text-decoration: none;
+}
+.product-img{
+    transition: all ease 500ms;
+}
+.product-img:hover{
+    opacity: 0.2;
+}
+.product-title{
+    color: #000;
+    font-size: 20px;
+    font-weight: 900;
+}
+.product-price{
+    color: #000;
+    font-size: 18px;
+}
+
+
+/**
+*MEDIAS QUERYS
+*/
 @media (max-width:800px) {
     .carousel-caption p {
         font-size: 20px;
