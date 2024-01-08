@@ -1,0 +1,101 @@
+import { Link, Navigate } from "react-router-dom";
+import UserContext from "../../context/user/UserContext";
+import { useContext, useEffect, useState } from "react";
+import Login from "./Login";
+
+const Account = () => {
+
+    const { infoUser, authStatus } = useContext(UserContext);
+
+    /**
+     * UPDATE USER
+     */
+    const initialValues = {
+        id: "",
+        name: "",
+        email: "",
+        password: ""
+    };
+    const [user, setUser] = useState(initialValues);
+
+    /**
+    * DATA VARIABLE BY INPUT
+    */
+    const handleChange = (e) => {
+        setUser((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value
+        }))
+    }
+
+    /**
+    * SUBMIT FORM REGISTER
+    */
+    const updateSubmit = (event) => {
+        event.preventDefault();
+
+
+        console.log(user);
+        console.log(infoUser);
+    };
+
+
+
+    useEffect(() => {
+        setUser((prevState) => ({
+            ...prevState,
+            ["id"]: infoUser._id,
+            ["name"]: infoUser.name,
+            ["email"]: infoUser.email,
+        }));
+    }, [infoUser]);
+
+    return (
+        authStatus ?
+            <>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-12 mt-5">
+                            <nav aria-label="breadcrumb">
+                                <ol className="breadcrumb">
+                                    <li className="breadcrumb-item"><Link className="product-link" to={"/"}>Home</Link></li>
+                                    <li className="breadcrumb-item active" aria-current="page">Mi Cuenta</li>
+                                </ol>
+                            </nav>
+                        </div>
+                        <div className="col-md-12">
+                            <h2 className="title-page">Mi Cuenta</h2>
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <form onSubmit={updateSubmit}>
+                            <div className="col-md-4">
+                                <label>Nombre</label>
+                                <input type="text" onChange={handleChange} className="form-control" name="name" value={infoUser.name} required />
+                            </div>
+                            <div className="col-md-4">
+                                <label>E-mail</label>
+                                <input type="email" className="form-control" name="email" value={infoUser.email} readOnly />
+                            </div>
+                            <div className="col-md-4">
+                                <label>Contraseña</label>
+                                <input type="password" onChange={handleChange} className="form-control" name="password" />
+                            </div>
+                            <div className="col-md-4 mt-5">
+                                <button type="submit" className="btn btn-primary form-control">Actualizar Datos</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </>
+            :
+            <>
+                <Login></Login>
+            </>
+
+    );
+};
+
+
+export default Account;

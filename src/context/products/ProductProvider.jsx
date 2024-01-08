@@ -20,6 +20,10 @@ const ProductProvider = ({children}) => {
     
     const [productState, dispatch] = useReducer(productReducer, initialState)
 
+
+    /**
+     * LIST PRODUCTS
+     */
     const getProducts = async() => {
         const response = await axiosClient.get("/products")
         const productos = response.data.info;
@@ -30,6 +34,10 @@ const ProductProvider = ({children}) => {
         })
     }
 
+    /**
+     * PRODUCT BY ID
+     * @param {*} id 
+     */
     const getProductById = async(id) => {
         try {
             const response = await axiosClient.get(`/product/${id}`);

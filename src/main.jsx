@@ -14,14 +14,17 @@ import { BrowserRouter } from "react-router-dom";
 
 //Providers
 import ProductProvider from './context/products/ProductProvider.jsx'
+import UserProvider from './context/user/UserProvider.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <ProductProvider>
-        <App />
-      </ProductProvider>
+      <UserProvider>
+        <ProductProvider>
+          <App />
+        </ProductProvider>
+      </UserProvider>
     </BrowserRouter>
   </React.StrictMode>,
 )
