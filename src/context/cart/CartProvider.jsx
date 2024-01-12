@@ -5,8 +5,12 @@ import cartReducer from "./cartReducer";
 
 
 
-const CartProvider = ({children}) => {
+const CartProvider = ({ children }) => {
 
+
+    /**
+     * INICIALIZE STATE
+     */
     const initialState = {
         isCartOpen: false,
         cartItems: [],
@@ -14,10 +18,15 @@ const CartProvider = ({children}) => {
         cartTotal: 0
     }
 
-    const [{isCartOpen, cartItems, cartCount, cartTotal}, dispatch] = useReducer(cartReducer, initialState)
+    /**
+     * USE REDUCER
+     */
+    const [{ isCartOpen, cartItems, cartCount, cartTotal }, dispatch] = useReducer(cartReducer, initialState)
 
 
-    //funciones 
+    /**
+     * UPDATE CART REDUCER
+     */
     const updateCartItemReducer = (newCartItems) => {
         const newCartCount = newCartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
         const newCartTotal = newCartItems.reduce((total, cartItem) => total + cartItem.quantity * cartItem.price, 0);
@@ -32,16 +41,25 @@ const CartProvider = ({children}) => {
         })
     }
 
+    /**
+     * ADD ITEM CART
+     */
     const addItemToCart = (productToAdd) => {
         const newCartItems = addCartItem(cartItems, productToAdd)
         updateCartItemReducer(newCartItems)
     }
 
+    /**
+     * REMOVE ITEM CART
+     */
     const removeItemToCart = (cartItemToRemove) => {
         const newCartItems = removeCartItem(cartItems, cartItemToRemove)
         updateCartItemReducer(newCartItems)
     }
 
+    /**
+     * CLEAR CART
+     */
     const clearItemToCart = (cartItemToClear) => {
         const newCartItems = clearCartItem(cartItems, cartItemToClear)
         updateCartItemReducer(newCartItems)
@@ -63,19 +81,19 @@ const CartProvider = ({children}) => {
 
 
 
-  return (
-    <CartContext.Provider value={{
-        addItemToCart, 
-        removeItemToCart, 
-        clearItemToCart,
-        clearItemToCheckout,
-        setIsCartOpen,
-        isCartOpen,
-        cartItems,
-        cartCount,
-        cartTotal
-    }}>{children}</CartContext.Provider>
-  )
+    return (
+        <CartContext.Provider value={{
+            addItemToCart,
+            removeItemToCart,
+            clearItemToCart,
+            clearItemToCheckout,
+            setIsCartOpen,
+            isCartOpen,
+            cartItems,
+            cartCount,
+            cartTotal
+        }}>{children}</CartContext.Provider>
+    )
 }
 
 export default CartProvider

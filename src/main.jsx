@@ -8,6 +8,8 @@ import App from './App.jsx'
 //styles
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css'
+
 
 //Routes
 import { BrowserRouter } from "react-router-dom";
@@ -15,6 +17,7 @@ import { BrowserRouter } from "react-router-dom";
 //Providers
 import ProductProvider from './context/products/ProductProvider.jsx'
 import UserProvider from './context/user/UserProvider.jsx'
+import CartProvider from './context/cart/CartProvider.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -22,7 +25,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <UserProvider>
         <ProductProvider>
-          <App />
+          <CartProvider>
+            <App />
+          </CartProvider>
         </ProductProvider>
       </UserProvider>
     </BrowserRouter>

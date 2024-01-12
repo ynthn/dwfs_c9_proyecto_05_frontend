@@ -13,6 +13,17 @@ footer {
     color: #fff;
     text-decoration: none;
 }
-.footer_list li{
+
+.footer_list li {
     color: #fff;
+}
+
+.rrss {
+    list-style: none;
+    display: flex;
+}
+.rrss li i{
+    color: #fff;
+    margin-right: 20px;
+    font-size: 28px;
 }

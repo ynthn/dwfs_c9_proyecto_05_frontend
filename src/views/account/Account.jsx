@@ -1,11 +1,13 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../../context/user/UserContext";
 import { useContext, useEffect, useState } from "react";
 import Login from "./Login";
 
 const Account = () => {
+    const navigate = useNavigate();
+    const { infoUser, authStatus, updateUser, deleteUser, signOut, verifyToken, updateStatus } = useContext(UserContext);
 
-    const { infoUser, authStatus } = useContext(UserContext);
+    const [error, setError] = useState("");
 
     /**
      * UPDATE USER
@@ -17,6 +19,7 @@ const Account = () => {
         password: ""
     };
     const [user, setUser] = useState(initialValues);
+
 
     /**
     * DATA VARIABLE BY INPUT
@@ -33,22 +36,62 @@ const Account = () => {
     */
     const updateSubmit = (event) => {
         event.preventDefault();
-
+        updateUser(user);
 
         console.log(user);
         console.log(infoUser);
+
+
+    };
+
+    /**
+     * DELETE ACCOUNT
+     */
+    const deleteAccount = () => {
+        console.log("click");
+        deleteUser(user);
+        signOut();
     };
 
 
-
+    /**
+     * PRECARGA DE DATOS
+     */
     useEffect(() => {
+
+        console.log(infoUser);
         setUser((prevState) => ({
             ...prevState,
-            ["id"]: infoUser._id,
-            ["name"]: infoUser.name,
-            ["email"]: infoUser.email,
-        }));
+            id: infoUser._id,
+            name: infoUser.name,
+            email: infoUser.email,
+        }))
     }, [infoUser]);
+
+
+    /**
+     * LOAD DATA NAME USER
+     */
+    useEffect(() => {
+        const getInfoUser = async () => {
+            await verifyToken();
+        }
+        getInfoUser();
+    }, []);
+
+
+    /**
+     * MESSAGE UPDATE
+     */
+    useEffect(() => {
+        if (updateStatus) {
+            setError("Usuario Actualizado");
+        } else {
+            setError("");
+        }
+    }, [updateStatus]);
+
+
 
     return (
         authStatus ?
@@ -72,18 +115,25 @@ const Account = () => {
                         <form onSubmit={updateSubmit}>
                             <div className="col-md-4">
                                 <label>Nombre</label>
-                                <input type="text" onChange={handleChange} className="form-control" name="name" value={infoUser.name} required />
+                                <input type="text" onChange={handleChange} className="form-control" name="name" value={user.name || ''} required />
                             </div>
                             <div className="col-md-4">
                                 <label>E-mail</label>
-                                <input type="email" className="form-control" name="email" value={infoUser.email} readOnly />
+                                <input type="email" className="form-control" name="email" value={user.email || ''} readOnly />
                             </div>
                             <div className="col-md-4">
                                 <label>Contraseña</label>
                                 <input type="password" onChange={handleChange} className="form-control" name="password" />
                             </div>
+                            <div className="col-md-4">
+                                <div className="message-success">{error}</div>
+                            </div>
+
                             <div className="col-md-4 mt-5">
                                 <button type="submit" className="btn btn-primary form-control">Actualizar Datos</button>
+                            </div>
+                            <div className="col-md-4 mt-2">
+                                <button type="button" onClick={deleteAccount} className="btn btn-danger form-control">Eliminar Cuenta</button>
                             </div>
                         </form>
                     </div>

@@ -6,12 +6,18 @@ const userReducer = (state, action) => {
             localStorage.setItem("token", payload) // Bearer header.payload.firma
             return {
                 ...state,
-                authStatus: true
+                authStatus: true,
             }
         case "USER_UPDATE":
             return {
                 ...state,
-                authStatus: true
+                authStatus: true,
+                updateStatus: true
+            }
+        case "USER_DELETE":
+            return {
+                ...state,
+                authStatus: false
             }
         case "LOGIN_ERROR":
             return {
@@ -22,14 +28,16 @@ const userReducer = (state, action) => {
             return {
                 ...state,
                 infoUser: payload,
-                authStatus: true
+                authStatus: true,
+                infoStatus: true
             }
         case "SIGN_OUT":
             localStorage.removeItem("token")
             return {
                 ...state,
                 infoUser: [],
-                authStatus: false
+                authStatus: false,
+                infoStatus:false
             }
         default:
             return state;

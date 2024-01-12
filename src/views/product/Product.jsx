@@ -7,14 +7,25 @@ const Product = () => {
   const { id } = useParams();
 
   const { getProductById, product } = useContext(ProductContext);
-  const { addItemToCart, cartCount } = useContext(CartContext)
-
-  //explicar
-  const handleAdd = () => { if (cartCount < stock) addItemToCart(product[0]) }
-
-  const { name, stock, price, image, sku } = product[0];
+  const { addItemToCart, cartCount } = useContext(CartContext);
+  const { name, stock, price, image } = product[0];
 
 
+  /**
+   * HANDLE ADD PRODUCT
+   */
+  const handleAdd = () => {
+    console.log(cartCount);
+    if (cartCount < stock) {
+      addItemToCart(product[0]);
+    }
+  };
+
+
+
+  /**
+   * LOAD DATA PRODUCT
+   */
   useEffect(() => {
     const fetchProduct = async () => {
       await getProductById(id);
@@ -49,17 +60,11 @@ const Product = () => {
             <p className="product-stock">
               <b>Stock</b>: {stock}
             </p>
-            {stock === 0 ? (
-              <h4 className="text-red-800 no-underline">Sin Stock</h4>
-            ) : (
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={handleAdd}
-              >
-                Añadir
-              </button>
-            )}
+            {stock === 0 ?
+              (<button className="cart-btn-add">Sin Stock</button>)
+              :
+              (<button className="cart-btn-add" onClick={handleAdd}>Agregar a mi carro</button>)
+            }
           </div>
 
         </div>

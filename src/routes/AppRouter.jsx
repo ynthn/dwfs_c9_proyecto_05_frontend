@@ -6,6 +6,7 @@ import Product from "../views/product/Product";
 import Account from "../views/account/Account";
 import NewAccount from "../views/account/NewAccount";
 import Login from "../views/account/Login";
+import Checkout from "../views/checkout/Checkout";
 
 
 const AppRouter = () => {
@@ -19,6 +20,7 @@ const AppRouter = () => {
                     <Route path='/mi-cuenta' element={<Account />} />
                     <Route path='/crear-cuenta' element={<NewAccount />} />
                     <Route path='/iniciar-sesion' element={<Login />} />
+                    <Route path='/checkout' element={<Checkout />} />
                 </Route>
             </Routes>
         </>

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../../context/user/UserContext";
 
@@ -7,10 +7,6 @@ const Login = () => {
     const navigate = useNavigate();
 
     const { loginUser, authStatus } = useContext(UserContext);
-
-    if (authStatus) {
-        navigate("/mi-cuenta");
-    }
 
     const initialValues = {
         name: "",
@@ -25,11 +21,11 @@ const Login = () => {
      * DATA VARIABLE BY INPUT
      */
     const handleChange = (e) => {
-        console.log(user);
         setUser((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value
-        }))
+        }));
+        console.log(user);
     }
     /**
      * SUBMIT FORM LOGIN
@@ -41,14 +37,19 @@ const Login = () => {
 
         loginUser(user);
 
-        setUser(initialValues);
-
-        if (authStatus) {
-            navigate("/mi-cuenta");
-        } else {
+        if (!authStatus) {
             setError("Datos de acceso Incorrecto");
         }
     };
+
+    /**
+     * REDIRECT LOGIN
+     */
+    useEffect(() => {
+        if (authStatus) {
+            navigate("/productos");
+        }
+    }, [authStatus, navigate]);
 
     return (
         <>
@@ -77,10 +78,14 @@ const Login = () => {
                             <label>Contraseña</label>
                             <input type="password" onChange={handleChange} onClick={handleChange} className="form-control" name="password" required />
                         </div>
+                        <div className="col-md-4">
+                            <div className="message-error">{error}</div>
+                        </div>
+
                         <div className="col-md-4 mt-5">
                             <button type="submit" className="btn btn-primary form-control">Iniciar Sesión</button>
                         </div>
-                        <div className="message-error">{error}</div>
+
                     </form>
                 </div>
             </div>

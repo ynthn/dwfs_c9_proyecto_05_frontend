@@ -12,7 +12,9 @@ const UserProvider = ({ children }) => {
     //initialState
     const initialState = {
         infoUser: [],
-        authStatus: false
+        authStatus: false,
+        updateStatus: false,
+        infoStatus: false
     }
 
     //useReducer ---> estados
@@ -34,7 +36,7 @@ const UserProvider = ({ children }) => {
                 dispatch({
                     type: "REGISTER/LOGIN",
                     payload: userOn.token
-                })
+                });
             } else {
                 dispatch({
                     type: "LOGIN_ERROR"
@@ -80,12 +82,36 @@ const UserProvider = ({ children }) => {
             const userUpdate = await axiosClient.put("/user/" + user.id, user);
             const userOn = userUpdate.data;
 
+            console.log(userOn);
+
+            if (userOn.success) {
+                dispatch({
+                    type: "USER_UPDATE",
+                    payload: userOn.token
+                })
+            }
+
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+    /**
+       * DELETE USER
+       */
+    const deleteUser = async (user) => {
+        try {
+            const userUpdate = await axiosClient.delete("/user/" + user.id, user);
+            const userOn = userUpdate.data;
+
             console.log(userOn)
             console.log(userOn.token)
 
             if (userOn.success) {
                 dispatch({
-                    type: "USER_UPDATE",
+                    type: "USER_DELETE",
                     payload: userOn.token
                 })
             }
@@ -95,10 +121,6 @@ const UserProvider = ({ children }) => {
             console.log(error)
         }
     }
-
-
-
-
 
 
 
@@ -147,8 +169,11 @@ const UserProvider = ({ children }) => {
             verifyToken,
             signOut,
             updateUser,
+            deleteUser,
             infoUser: userState.infoUser,
-            authStatus: userState.authStatus
+            authStatus: userState.authStatus,
+            updateStatus: userState.updateStatus,
+            infoStatus: userState.infoStatus
         }}>{children}</UserContext.Provider>
     )
 }

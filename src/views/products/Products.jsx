@@ -1,23 +1,48 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import ProductContext from "../../context/products/ProductContext";
 import CardProducts from "../../components/cardProducts/CardProducts";
 import { Link } from "react-router-dom";
+import Loader from "../../components/loader/loader";
+import UserContext from "../../context/user/UserContext";
 
 
 
 const Products = () => {
 
+  const [stateLoading, setStateLoading] = useState(false);
   const { getProducts, products } = useContext(ProductContext)
+  const { infoUser, signOut, authStatus, verifyToken,infoStatus } = useContext(UserContext);
 
+
+  /**
+   * LOAD LIST PRODUCTS
+   */
   useEffect(() => {
     const axiosProducts = async () => {
+      setStateLoading(true);
       await getProducts();
+
+      setStateLoading(false);
     }
-    axiosProducts()
+    axiosProducts();
+    
+  }, []);
+
+
+
+  /**
+   * LOAD DATA NAME USER
+   */
+  useEffect(() => {
+    const getInfoUser = async () => {
+      await verifyToken();
+    }
+    getInfoUser();
   }, []);
 
   return (
     <>
+    <Loader stateLoading={stateLoading} setStateLoading={setStateLoading}></Loader>
       <div className="container">
         <div className="row">
           <div className="col-md-12 mt-5">

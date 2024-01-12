@@ -2,28 +2,43 @@ import { useContext, useEffect, useState } from 'react';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import UserContext from '../../context/user/UserContext';
 import { NavLink } from 'react-router-dom';
+import CartContext from '../../context/cart/CartContext';
+import CartBar from '../card/cartBar';
 
 
 
 
 
 const Navigation = () => {
+  const { infoUser, signOut, authStatus, verifyToken, infoStatus } = useContext(UserContext);
+  const [userName, setUserName] = useState("Hola, ");
+  const { isCartOpen,setIsCartOpen } = useContext(CartContext);
 
-  const { infoUser, signOut, authStatus, verifyToken } = useContext(UserContext);
-  const [userName, setUserName] = useState("No conectado");
+  const handleOpen = () => {
+    setIsCartOpen(true);
+  };
 
-
+  /**
+   * LOAD DATA NAME USER
+   */
   useEffect(() => {
     const getInfoUser = async () => {
       await verifyToken();
-      
-      if (infoUser.name != "undefined") {
-        setUserName("Hola, " + infoUser.name)
+
+      console.log(infoUser);
+      console.log(infoStatus);
+
+      if (infoStatus === true) {
+        if (infoUser.name != "undefined") {
+          console.log("entro");
+          setUserName("Hola, " + infoUser.name);
+        }
       }
 
     }
+
     getInfoUser();
-  }, [userName]);
+  }, [infoStatus]);
 
 
   return (
@@ -36,6 +51,7 @@ const Navigation = () => {
             <Nav className="me-auto">
               <Nav.Link href="/">Inicio</Nav.Link>
               <Nav.Link href="productos">Productos</Nav.Link>
+              <Nav.Link href="checkout">Checkout</Nav.Link>
               {authStatus &&
                 <NavDropdown title={userName}>
                   <NavDropdown.Item as={NavLink} to="mi-cuenta">Mi Cuenta</NavDropdown.Item>
@@ -49,7 +65,7 @@ const Navigation = () => {
                 <Nav.Link href="iniciar-sesion">Iniciar Sesión</Nav.Link>
               }
 
-
+              <Nav.Link onClick={handleOpen}><i className="bi bi-cart3"></i></Nav.Link>
 
 
 
@@ -57,7 +73,10 @@ const Navigation = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      {isCartOpen && <CartBar></CartBar>}
     </header>
+
+
   )
 };
 
