@@ -8,7 +8,7 @@ const cartReducer = (state, action) => {
             return {...state, isCartOpen: payload}
         case "CLEAR_CHECKOUT":
             return {
-                isCartOpen: false,
+                isCartOpen: true,
                 cartItems: [],
                 cartCount: 0,
                 cartTotal: 0  

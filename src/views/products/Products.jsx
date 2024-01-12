@@ -6,12 +6,12 @@ import Loader from "../../components/loader/loader";
 import UserContext from "../../context/user/UserContext";
 
 
-
 const Products = () => {
 
   const [stateLoading, setStateLoading] = useState(false);
   const { getProducts, products } = useContext(ProductContext)
-  const { infoUser, signOut, authStatus, verifyToken,infoStatus } = useContext(UserContext);
+  const { verifyToken } = useContext(UserContext);
+  
 
 
   /**

@@ -1,15 +1,26 @@
 import { Link } from "react-router-dom";
+import CartContext from "../../context/cart/CartContext";
+import { useContext } from "react";
 const CardProducts = ({ product }) => {
 
   const { name, price, _id, image, stock } = product;
+  const { addItemToCart, cartCount, cartItems } = useContext(CartContext);
 
 
   /**
-   * ADD PRODUCT CART
-   */
+ * HANDLE ADD PRODUCT
+ */
   const handleAdd = () => {
-    console.log("....");
-  }
+    console.log(product);
+    if (cartCount < stock) {
+      addItemToCart(product);
+    }
+    console.log(cartCount);
+    console.log(cartItems);
+  };
+
+
+
 
   return (
     <div className="col-md-3 col-sm-6  col-xs-6">
