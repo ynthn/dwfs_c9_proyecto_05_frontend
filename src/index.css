@@ -122,11 +122,21 @@ header {
     text-decoration: none;
     border-radius: 10px;
     width: 100%;
+    max-width: 200px;
 }
 
 .card-padding {
     padding: 40px 10px 10px 10px;
 }
+
+
+/*CHECKOUT*/
+.checkout-total{
+    font-size: 20px;
+}
+
+
+
 
 /**
 *MEDIAS QUERYS

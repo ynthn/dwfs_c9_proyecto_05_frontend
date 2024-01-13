@@ -7,14 +7,26 @@ export const addCartItem = (cartItems, productToAdd) => {
     const existingCartItem = cartItems.find((cartItem) => cartItem._id === productToAdd._id);
 
     if (existingCartItem) {
-        return cartItems.map((cartItem) =>
-            cartItem._id === productToAdd._id ? { ...cartItem, quantity: cartItem.quantity + 1 }
-                : cartItem
+        return cartItems.map((cartItem) => {
+            if (cartItem._id === productToAdd._id) {
+                console.log(productToAdd);
+                console.log(cartItem);
+                if (productToAdd.stock > cartItem.quantity) {
+                    return { ...cartItem, quantity: cartItem.quantity + 1 };
+                } else {
+                    return { ...cartItem, quantity: cartItem.quantity };
+                }
+            } else {
+                return cartItem;
+            }
+        }
         )
+    } else {
+        return [...cartItems, { ...productToAdd, quantity: 1 }];
     }
 
 
-    return [...cartItems, { ...productToAdd, quantity: 1 }]
+
 }
 
 /**

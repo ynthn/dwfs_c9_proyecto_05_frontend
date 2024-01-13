@@ -4,19 +4,15 @@ import { useContext } from "react";
 const CardProducts = ({ product }) => {
 
   const { name, price, _id, image, stock } = product;
-  const { addItemToCart, cartCount, cartItems } = useContext(CartContext);
+  const { addItemToCart, cartCount, cartItems, setIsCartOpen } = useContext(CartContext);
 
 
   /**
  * HANDLE ADD PRODUCT
  */
   const handleAdd = () => {
-    console.log(product);
-    if (cartCount < stock) {
-      addItemToCart(product);
-    }
-    console.log(cartCount);
-    console.log(cartItems);
+    addItemToCart(product);
+    setIsCartOpen(true);
   };
 
 

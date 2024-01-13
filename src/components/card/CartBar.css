@@ -66,6 +66,7 @@
     width: 80%;
     margin-left: 10%;
 }
+
 .cart-bar-clear {
     border: 0;
     padding: 10px 10px 10px 10px;
@@ -99,6 +100,19 @@
 .cart-bar-content-detail-2 {
     display: table-cell;
     vertical-align: middle;
+}
+
+.cart-bar-content-detail-3 {
+    display: table-cell;
+    vertical-align: middle;
+    width: 40px;
+}
+.cart-bar-content-delete{
+    background-color: red;
+    color: #fff;
+    border: 0px;
+    padding: 5px 10px 5px 10px;
+    margin-right: 30px;
 }
 
 .cart-bar-content-info {

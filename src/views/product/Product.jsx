@@ -7,7 +7,7 @@ const Product = () => {
   const { id } = useParams();
 
   const { getProductById, product } = useContext(ProductContext);
-  const { addItemToCart, cartCount, cartItems } = useContext(CartContext);
+  const { addItemToCart, cartCount, setIsCartOpen } = useContext(CartContext);
   const { name, stock, price, image } = product[0];
 
 
@@ -15,11 +15,8 @@ const Product = () => {
    * HANDLE ADD PRODUCT
    */
   const handleAdd = () => {
-    if (cartCount < stock) {
-      addItemToCart(product[0]);
-    }
-    console.log(cartCount);
-    console.log(cartItems);
+    addItemToCart(product[0]);
+    setIsCartOpen(true);
   };
 
 

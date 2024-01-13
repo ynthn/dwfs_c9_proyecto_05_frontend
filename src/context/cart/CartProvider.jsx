@@ -13,10 +13,11 @@ const CartProvider = ({ children }) => {
      */
     const initialState = {
         isCartOpen: false,
-        cartItems: [],
-        cartCount: 0,
-        cartTotal: 0
+        cartItems: JSON.parse(localStorage.getItem("cartItems")) == null ? [] : JSON.parse(localStorage.getItem("cartItems")),
+        cartCount: (localStorage.getItem("cartCount")) == null ? 0 : (localStorage.getItem("cartCount")),
+        cartTotal: (localStorage.getItem("cartTotal")) == null ? 0 : (localStorage.getItem("cartTotal"))
     }
+
 
     /**
      * USE REDUCER
@@ -45,6 +46,7 @@ const CartProvider = ({ children }) => {
      * ADD ITEM CART
      */
     const addItemToCart = (productToAdd) => {
+        console.log(cartItems);
         const newCartItems = addCartItem(cartItems, productToAdd)
         updateCartItemReducer(newCartItems)
     }
@@ -65,12 +67,18 @@ const CartProvider = ({ children }) => {
         updateCartItemReducer(newCartItems)
     }
 
+    /**
+     * CLEAR AND GO CHECKOUT
+     */
     const clearItemToCheckout = () => {
         dispatch({
             type: "CLEAR_CHECKOUT"
         })
     }
 
+    /**
+     * SET STATE OPEN CART
+     */
     const setIsCartOpen = (bool) => {
         dispatch({
             type: "SET_IS_CART_OPEN",

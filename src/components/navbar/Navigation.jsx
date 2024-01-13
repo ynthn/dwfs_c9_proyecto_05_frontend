@@ -50,8 +50,8 @@ const Navigation = () => {
           <Navbar.Collapse className='justify-content-end' id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/">Inicio</Nav.Link>
-              <Nav.Link href="productos">Productos</Nav.Link>
-              <Nav.Link href="checkout">Checkout</Nav.Link>
+              <Nav.Link href="/productos">Productos</Nav.Link>
+              <Nav.Link href="/checkout">Checkout</Nav.Link>
               {authStatus &&
                 <NavDropdown title={userName}>
                   <NavDropdown.Item as={NavLink} to="mi-cuenta">Mi Cuenta</NavDropdown.Item>
@@ -59,10 +59,10 @@ const Navigation = () => {
                 </NavDropdown>
               }
               {!authStatus &&
-                <Nav.Link href="crear-cuenta">Crear Cuenta</Nav.Link>
+                <Nav.Link href="/crear-cuenta">Crear Cuenta</Nav.Link>
               }
               {!authStatus &&
-                <Nav.Link href="iniciar-sesion">Iniciar Sesión</Nav.Link>
+                <Nav.Link href="/iniciar-sesion">Iniciar Sesión</Nav.Link>
               }
 
               <Nav.Link onClick={handleOpen}><i className="bi bi-cart3"></i></Nav.Link>
