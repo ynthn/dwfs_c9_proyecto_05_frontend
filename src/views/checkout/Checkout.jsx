@@ -7,7 +7,7 @@ import Paypal from "../../components/paypal/Paypal";
 
 const Checkout = () => {
 
-    const { setIsCartOpen, cartItems, clearItemToCheckout, cartTotal } = useContext(CartContext);
+    const { cartItems, cartTotal } = useContext(CartContext);
 
 
     return (

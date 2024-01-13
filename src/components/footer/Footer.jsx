@@ -11,15 +11,19 @@ const Footer = () => {
                             <div className="footer__title">Datos de contacto</div>
                             <ul className="footer_list">
                                 <li>
-                                    <a href="">yonathan.munoz.bravo@gmail.com</a>
+                                    yonathan.munoz.bravo@gmail.com
                                 </li>
                                 <li>
-                                    <a href="">+569 89162 2225</a>
+                                    +569 89162 2225
                                 </li>
                                 <li>
-                                    <a href="">Región del Maule, Chile</a>
+                                    Región del Maule, Chile
                                 </li>
                             </ul>
+
+                        </div>
+                        <div className="col-md-4">
+                            <div className="footer__title">Redes sociales</div>
                             <ul className="rrss">
                                 <li>
                                     <a href="#">
@@ -34,33 +38,16 @@ const Footer = () => {
                             </ul>
                         </div>
                         <div className="col-md-4">
-                            <div className="footer__title">Categorias de productos</div>
-                            <ul className="footer_list">
-                                <li>
-                                    <a href="">Pelotas</a>
-                                </li>
-                                <li>
-                                    <a href="">Huesos</a>
-                                </li>
-                                <li>
-                                    <a href="">Platos</a>
-                                </li>
-                                <li>
-                                    <a href="">Casas</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="col-md-4">
                             <div className="footer__title">Centro de ayuda</div>
                             <ul className="footer_list">
                                 <li>
-                                    <a href="">Medios de pagos</a>
+                                    <a href="/medios-de-pagos">Medios de pagos</a>
                                 </li>
                                 <li>
-                                    <a href="">Garantía de producto</a>
+                                    <a href="/garantia-del-producto">Garantía de producto</a>
                                 </li>
                                 <li>
-                                    <a href="">Terminos y condiciones</a>
+                                    <a href="/terminos-condiciones">Terminos y condiciones</a>
                                 </li>
                             </ul>
                         </div>

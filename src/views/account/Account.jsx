@@ -1,13 +1,15 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import UserContext from "../../context/user/UserContext";
 import { useContext, useEffect, useState } from "react";
 import Login from "./Login";
+import ModalMessage from "../../components/modal/ModalMessage";
 
 const Account = () => {
-    const navigate = useNavigate();
+    const [show, setShow] = useState(false);
+    const [nameModal, setNameModal] = useState("");
+
     const { infoUser, authStatus, updateUser, deleteUser, signOut, verifyToken, updateStatus } = useContext(UserContext);
 
-    const [error, setError] = useState("");
 
     /**
      * UPDATE USER
@@ -85,10 +87,9 @@ const Account = () => {
      */
     useEffect(() => {
         if (updateStatus) {
-            setError("Usuario Actualizado");
-        } else {
-            setError("");
-        }
+            setNameModal("Datos de usuario Actualizado");
+            setShow(true);
+        } 
     }, [updateStatus]);
 
 
@@ -96,6 +97,9 @@ const Account = () => {
     return (
         authStatus ?
             <>
+                <ModalMessage setShow={setShow} show={show}>
+                    {nameModal}
+                </ModalMessage>
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12 mt-5">
@@ -119,15 +123,13 @@ const Account = () => {
                             </div>
                             <div className="col-md-4">
                                 <label>E-mail</label>
-                                <input type="email" className="form-control" name="email" value={user.email || ''} readOnly />
+                                <input type="email" className="form-control" name="email" value={user.email || ''} disabled />
                             </div>
                             <div className="col-md-4">
                                 <label>Contraseña</label>
                                 <input type="password" onChange={handleChange} className="form-control" name="password" />
                             </div>
-                            <div className="col-md-4">
-                                <div className="message-success">{error}</div>
-                            </div>
+                            
 
                             <div className="col-md-4 mt-5">
                                 <button type="submit" className="btn btn-primary form-control">Actualizar Datos</button>

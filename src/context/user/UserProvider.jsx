@@ -81,6 +81,7 @@ const UserProvider = ({ children }) => {
         try {
             const userUpdate = await axiosClient.put("/user/" + user.id, user);
             const userOn = userUpdate.data;
+            userState.updateStatus = false;
 
             console.log(userOn);
 

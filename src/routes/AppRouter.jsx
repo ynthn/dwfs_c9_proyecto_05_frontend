@@ -7,6 +7,9 @@ import Account from "../views/account/Account";
 import NewAccount from "../views/account/NewAccount";
 import Login from "../views/account/Login";
 import Checkout from "../views/checkout/Checkout";
+import PaymentMethods from "../views/pages/PaymentMethods";
+import Warranty from "../views/pages/Warranty";
+import TermsConditions from "../views/pages/TermsConditions";
 
 
 const AppRouter = () => {
@@ -21,6 +24,9 @@ const AppRouter = () => {
                     <Route path='/crear-cuenta' element={<NewAccount />} />
                     <Route path='/iniciar-sesion' element={<Login />} />
                     <Route path='/checkout' element={<Checkout />} />
+                    <Route path='/medios-de-pagos' element={<PaymentMethods />} />
+                    <Route path='/garantia-del-producto' element={<Warranty />} />
+                    <Route path='/terminos-condiciones' element={<TermsConditions />} />
                 </Route>
             </Routes>
         </>

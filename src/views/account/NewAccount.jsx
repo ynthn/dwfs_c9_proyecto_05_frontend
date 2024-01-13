@@ -34,7 +34,7 @@ const NewAccount = () => {
 
         setUser(initialValues);
 
-        navigate("/mi-cuenta");
+        navigate("/productos");
     };
 
     return (
