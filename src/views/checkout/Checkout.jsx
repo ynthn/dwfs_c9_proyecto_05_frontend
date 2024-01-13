@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import CartContext from "../../context/cart/CartContext";
 import { useContext } from "react";
 import CheckoutItem from "../../components/checkout/CheckoutItem";
+import Paypal from "../../components/paypal/Paypal";
+
 
 const Checkout = () => {
 
@@ -48,18 +50,20 @@ const Checkout = () => {
                     <div className="col-md-4">
                         <h5>Resumen de compra</h5>
                         <div className="checkout-total">Total: ${cartTotal}</div>
+                        <br/><br/><br/>
+                            {cartItems.length ? <Paypal /> : null}
+                        </div>
+                        </div>
+
+
+
+
+
+
+
                     </div>
-                </div>
-
-
-
-
-
-
-
-            </div>
-        </>
-    );
+                </>
+                );
 };
 
-export default Checkout;
+                export default Checkout;
