@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import ProductContext from "../../context/products/ProductContext";
 import CardProducts from "../../components/cardProducts/CardProducts";
 import { Link } from "react-router-dom";
-import Loader from "../../components/loader/loader";
+import Loader from "../../components/loader/Loader";
 import UserContext from "../../context/user/UserContext";
 
 
