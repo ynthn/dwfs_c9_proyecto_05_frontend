@@ -35,6 +35,8 @@ Construir una aplicación de eCommerce con las siguiente funcionalidades:
 * -IMAGENES desde freepik.es
 * -ICONOS desde icons.getbootstrap.com
 * -Pasarela de pago Paypal
+* -Deploy Backend: https://render.com/
+* -Deploy Frontend: https://www.netlify.com/
 
 
 ## 3. Prototipo
