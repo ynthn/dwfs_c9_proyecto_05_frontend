@@ -3,7 +3,7 @@ import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import UserContext from '../../context/user/UserContext';
 import { NavLink } from 'react-router-dom';
 import CartContext from '../../context/cart/CartContext';
-import CartBar from '../card/cartBar';
+import CartBar from '../card/CartBar';
 
 
 
