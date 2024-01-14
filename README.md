@@ -16,7 +16,7 @@ Construir una aplicación de eCommerce con las siguiente funcionalidades:
 * Autenticación (registro de usuario e inicio de sesión, a través de JWT)
 * Autorización (zona privada donde el usuario pueda ver su perfil)
 
-
+URL FINAL: https://friendly-rabanadas-ea40df.netlify.app/
 
 ## 2. Tecnologías utilizadas
 * -HTML 5
