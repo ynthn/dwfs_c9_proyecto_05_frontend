@@ -50,20 +50,24 @@ const Checkout = () => {
                     <div className="col-md-4">
                         <h5>Resumen de compra</h5>
                         <div className="checkout-total">Total: ${cartTotal}</div>
-                        <br/><br/><br/>
-                            {cartItems.length ? <Paypal /> : null}
-                        </div>
-                        </div>
-
-
-
-
-
-
-
+                        <br /><br /><br />
+                        {cartItems.length ? <Paypal /> : null}
                     </div>
-                </>
-                );
+
+                    <div className="col-md-12 mt-5"></div>
+                    <div className="col-md-12 mt-5"></div>
+                    <div className="col-md-12 mt-5"></div>
+                </div>
+
+
+
+
+
+
+
+            </div>
+        </>
+    );
 };
 
-                export default Checkout;
+export default Checkout;

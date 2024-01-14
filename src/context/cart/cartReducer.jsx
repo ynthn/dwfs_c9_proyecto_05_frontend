@@ -12,6 +12,9 @@ const cartReducer = (state, action) => {
             }
         case "SET_IS_CART_OPEN":
             return { ...state, isCartOpen: payload }
+        case "MAKE_BUY":
+            console.log(payload);
+            return { ...state, makeBuyState: payload }
         case "CLEAR_CHECKOUT":
             localStorage.setItem("cartCount", 0);
             localStorage.setItem("cartItems", JSON.stringify([]));
@@ -20,7 +23,8 @@ const cartReducer = (state, action) => {
                 isCartOpen: false,
                 cartItems: [],
                 cartCount: 0,
-                cartTotal: 0
+                cartTotal: 0,
+                makeBuyState:true
             }
         default:
             throw new Error(`unhandledd type of ${type} in cartReducer`)

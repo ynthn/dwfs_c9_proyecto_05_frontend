@@ -23,6 +23,7 @@ Construir una aplicación de eCommerce con las siguiente funcionalidades:
 * -CSS
 * -REACT BOOTSTRAP
 * -JAVASCRIPT
+* -LOCALSTORAGE
 * -GIT/GITHUB
 * -NODE.JS (Entorno controlado por eventos diseñado para crear aplicaciones escalables)
 * -ExpressJS (Framework Backend de node.js)

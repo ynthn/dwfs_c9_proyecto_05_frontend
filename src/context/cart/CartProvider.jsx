@@ -2,6 +2,7 @@ import CartContext from "./CartContext";
 import { useReducer } from "react";
 import { addCartItem, removeCartItem, clearCartItem } from "./cartFunction";
 import cartReducer from "./cartReducer";
+import axiosClient from '../../config/axiosClient';
 
 
 
@@ -12,6 +13,7 @@ const CartProvider = ({ children }) => {
      * INICIALIZE STATE
      */
     const initialState = {
+        makeBuyState: false,
         isCartOpen: false,
         cartItems: JSON.parse(localStorage.getItem("cartItems")) == null ? [] : JSON.parse(localStorage.getItem("cartItems")),
         cartCount: (localStorage.getItem("cartCount")) == null ? 0 : (localStorage.getItem("cartCount")),
@@ -22,7 +24,7 @@ const CartProvider = ({ children }) => {
     /**
      * USE REDUCER
      */
-    const [{ isCartOpen, cartItems, cartCount, cartTotal }, dispatch] = useReducer(cartReducer, initialState)
+    const [{ isCartOpen, cartItems, cartCount, cartTotal, makeBuyState }, dispatch] = useReducer(cartReducer, initialState)
 
 
     /**
@@ -39,6 +41,20 @@ const CartProvider = ({ children }) => {
                 cartCount: newCartCount,
                 cartTotal: newCartTotal
             }
+        })
+    }
+
+    /**
+     * MAKE BUY BUY CART CURRENT
+     */
+    const makeBuy = async (name) => {
+        const response = await axiosClient.post("/make-buy", { cartItems: cartItems });
+        const data = response.data.success;
+        console.log(name, data);
+
+        dispatch({
+            type: "MAKE_BUY",
+            payload: data
         })
     }
 
@@ -96,10 +112,12 @@ const CartProvider = ({ children }) => {
             clearItemToCart,
             clearItemToCheckout,
             setIsCartOpen,
+            makeBuy,
             isCartOpen,
             cartItems,
             cartCount,
-            cartTotal
+            cartTotal,
+            makeBuyState
         }}>{children}</CartContext.Provider>
     )
 }
